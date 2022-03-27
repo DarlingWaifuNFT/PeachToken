@@ -133,11 +133,6 @@ contract Peach {
     }
 
     // Permission system
-    modifier onlyGame() {
-        require(msg.sender == game, "You are not the game.");
-        _;
-    }
-
     modifier onlyOwner() {
         require(msg.sender == owner, "You are not the owner.");
         _;
