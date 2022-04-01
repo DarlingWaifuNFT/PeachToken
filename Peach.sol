@@ -190,9 +190,11 @@ contract Peach {
     }
 
     function setPath(address[] calldata _path) external onlySupport {
-        while (path.length > 1) path.pop();
-        while (pricePath.length > 1) pricePath.pop();
+        delete path;
+        delete pricePath;
+        path.push(address(this));
         path.push(_path[0]);
+        pricePath.push(address(this));
         pricePath.push(_path[0]);
         pricePath.push(_path[1]);
     }
@@ -207,7 +209,7 @@ contract Peach {
         external
         onlySupport
     {
-        while (stabilizers.length > 0) stabilizers.pop();
+        delete stabilizers;
         for (uint256 i = 0; i < _stabilizers.length; i++)
             stabilizers.push(_stabilizers[i]);
     }
@@ -437,7 +439,7 @@ contract Peach {
         return (_amount, 0);
     }
 
-    function getBitCommission(uint256 _amount, uint256 _expenditure)
+    function getBigCommission(uint256 _amount, uint256 _expenditure)
         external
         pure
         returns (uint256)
