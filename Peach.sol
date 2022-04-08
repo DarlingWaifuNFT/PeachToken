@@ -18,13 +18,11 @@ library PeachMathematician {
     {
         // Get the daily commission
         uint256 paidCommission = (currentExpenditure *
-            (50000 - (45000 * 10**25) / (currentExpenditure + 10**25))) /
-            100000;
+            (50000 - (45000 * 10**25) / (currentExpenditure + 10**25)));
         uint256 currentCommission = ((x + currentExpenditure) *
-            (50000 - (45000 * 10**25) / ((x + currentExpenditure) + 10**25))) /
-            100000;
+            (50000 - (45000 * 10**25) / ((x + currentExpenditure) + 10**25)));
         // Subtract the already payed commission and return
-        return ((currentCommission - paidCommission) * 100000) / x;
+        return (currentCommission - paidCommission) / x;
     }
 }
 
@@ -422,7 +420,8 @@ contract Peach {
 
         // The user is not playing the game
         if (msg.sender != game) {
-            return (_amount, _amount.mul(5000).div(100000));
+            // 20% p2p tranfer fee, as suggested by DragonCrip
+            return (_amount, _amount.div(5));
         }
 
         // The user is playing the game
